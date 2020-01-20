@@ -1,24 +1,40 @@
-import React from 'react';
-import './style.css';
+import React, {useEffect} from 'react';
+import socket  from '../../services/io';
+import Menu  from '../../components/menu/menu.component';
+import BtnNew from '../../components/btnnew';
+import { Container, ContainerPreview } from './style';
+
 
 function Home() {
+
+useEffect(()=>{
+
+ socket.on('hello', (data)=>{
+   console.log(data)
+ })
+
+
+}, [])
+
+  const Enviar = ()=>{
+  socket.emit('hello')
+  }
+ 
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-       
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      <Container>
+      
+        <ContainerPreview>
+          <BtnNew/>  
+        <Menu/>
+        
+        </ContainerPreview>
+      </Container>
+     
+   
   );
 }
 
